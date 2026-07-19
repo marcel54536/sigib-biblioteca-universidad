@@ -1,0 +1,14 @@
+# Dependencias de build (no versionar)
+build/node_modules/
+node_modules/
+
+# Artefactos temporales
+docs/.propuesta.render.html
+*.log
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+build/package-lock.json

@@ -1,0 +1,73 @@
+graph TD
+  subgraph U["Carril: Usuario / Lector"]
+    INI(["Inicio"])
+    U0{"Tipo de operacion"}
+    U1["Presenta carnet y ejemplar"]
+    UDEV["Entrega el ejemplar a devolver"]
+    UREN["Solicita renovacion de un prestamo"]
+    U4["Acepta incorporarse a la cola de reservas"]
+    U3["Recibe el ejemplar y el comprobante"]
+    FIN(["Fin"])
+  end
+
+  subgraph B["Carril: Bibliotecario de circulacion"]
+    B1["Identifica al usuario y escanea el ejemplar"]
+    BINF["Informa el motivo del bloqueo al usuario"]
+    B5["Ofrece reserva en cola de espera"]
+    B3["Entrega el ejemplar y el comprobante"]
+    B4["Registra la devolucion del ejemplar"]
+    B6["Consulta el prestamo activo"]
+    BREN["Informa que la renovacion no procede"]
+  end
+
+  subgraph SUP["Carril: Supervisor de turno"]
+    SUP1["Evalua la excepcion y autoriza o rechaza"]
+  end
+
+  subgraph S["Carril: Sistema SIGIB"]
+    G1{"Usuario habilitado?"}
+    G2{"Ejemplar disponible?"}
+    S3["Aplica politica y calcula la fecha de vencimiento"]
+    S4["Registra el prestamo y actualiza el inventario"]
+    SRES["Registra el ejemplar en la cola de reservas"]
+    S6["Registra la devolucion y libera el ejemplar"]
+    G3{"Devuelto a tiempo?"}
+    S7["Calcula la multa por mora"]
+    G4{"Tiene reservas en cola?"}
+    S8["Actualiza el historial del usuario"]
+    G5{"El prestamo tiene reservas en cola?"}
+    S10["Extiende la fecha de vencimiento"]
+  end
+
+  subgraph N["Carril: Pasarela de notificaciones"]
+    N1["Envia el comprobante y programa el recordatorio"]
+    N2["Notifica la mora y el monto de la multa"]
+    N3["Avisa la disponibilidad al siguiente en la cola"]
+    N4["Notifica la nueva fecha de vencimiento"]
+  end
+
+  %% --- Seleccion de operacion ---
+  INI --> U0
+  U0 -->|"Prestamo"| U1
+  U0 -->|"Devolucion"| UDEV
+  U0 -->|"Renovacion"| UREN
+
+  %% --- Subproceso: PRESTAMO ---
+  U1 --> B1 --> G1
+  G1 -->|"No"| SUP1 --> BINF --> FIN
+  G1 -->|"Si"| G2
+  G2 -->|"No"| B5 --> U4 --> SRES --> FIN
+  G2 -->|"Si"| S3 --> S4 --> B3 --> U3 --> N1 --> FIN
+
+  %% --- Subproceso: DEVOLUCION ---
+  UDEV --> B4 --> S6 --> G3
+  G3 -->|"No"| S7 --> N2 --> G4
+  G3 -->|"Si"| G4
+  G4 -->|"Si"| N3 --> S8
+  G4 -->|"No"| S8
+  S8 --> FIN
+
+  %% --- Subproceso: RENOVACION (RF-07) ---
+  UREN --> B6 --> G5
+  G5 -->|"Si"| BREN --> FIN
+  G5 -->|"No"| S10 --> N4 --> FIN

@@ -1,0 +1,7 @@
+{
+  "name": "sigib-build",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Herramientas de build: render de BPMN y generación de PDF"
+}
