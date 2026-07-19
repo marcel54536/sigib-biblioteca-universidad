@@ -10,7 +10,7 @@
 | **Asignatura** | Sistemas de Información |
 | **Proyecto** | Enunciado para los Grupos #7 y #8 |
 | **Equipo** | Equipo N.º ____ |
-| **Integrantes** | 1) ____________________  ·  2) ____________________  ·  3) ____________________  ·  4) ____________________  ·  5) ____________________ |
+| **Integrantes** | José Betorrean  ·  Marcel Garavito  ·  Nicola Sigilo  ·  Melany Timaury |
 | **Fecha de entrega** | 19 de julio de 2026 |
 | **Prototipo en línea** | https://marcel54536.github.io/sigib-biblioteca-universidad/prototipo/ |
 | **Repositorio** | https://github.com/marcel54536/sigib-biblioteca-universidad |

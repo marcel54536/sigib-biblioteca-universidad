@@ -136,8 +136,12 @@ node screenshots.mjs             # capturas del prototipo (requiere el server lo
 
 Grupos #7 y #8 · Sistemas de Información · Universidad XXX
 
-> Completar antes de la entrega: nombres de los integrantes y renombrar el PDF según la convención
-> `equipo [N]-Proyecto final-[apellidos_en_orden_alfabético].pdf`.
+| # | Integrante |
+|---|---|
+| 1 | José Betorrean |
+| 2 | Marcel Garavito |
+| 3 | Nicola Sigilo |
+| 4 | Melany Timaury |
 
 ## 📄 Licencia
 
